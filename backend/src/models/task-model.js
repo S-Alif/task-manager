@@ -7,4 +7,4 @@ let task_schema = mongoose.Schema({
   status: { type: String }
 }, { timestamps: true, versionKey: false })
 
-exports.taskModel = mongoose.model('tasks', task_schema)
+module.exports = mongoose.model('tasks', task_schema)

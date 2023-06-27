@@ -7,4 +7,4 @@ let user_schema = mongoose.Schema({
   lastName: {type: String}
 }, { timestamps: true, versionKey: false })
 
-exports.userModel = mongoose.model('users', user_schema)
+module.exports = mongoose.model('users', user_schema)

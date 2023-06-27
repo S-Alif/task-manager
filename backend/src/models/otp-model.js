@@ -6,4 +6,4 @@ let otp_schema = mongoose.Schema({
   status: {type: Number, default: 0}
 },{timestamps: true, versionKey: false})
 
-exports.otpModel = mongoose.model('otps', otp_schema)
+module.exports = mongoose.model('otps', otp_schema)
