@@ -1,0 +1,3 @@
+--change the directory to "backend" folder
+--use command "npm install" to install all the packages in package.json
+--run index.js file to start the app
