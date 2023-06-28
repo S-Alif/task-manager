@@ -8,10 +8,11 @@ const mongoose = require('mongoose')
 const mongoSanitize = require('express-mongo-sanitize')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
+const fs = require('fs')
 
 const app = new express()
 const router = require('./src/routes/routes')
-dotenv.config({ path: './secret.env' })
+dotenv.config()
 
 // security purpose
 app.use(cors())
@@ -28,14 +29,21 @@ const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 300 });
 app.use(limiter);
 
 // connect to database
-// let url = "mongodb+srv://<username>:<password>@cluster0.wsvtn9r.mongodb.net/tasks-manager"
-// let option = { user: `${process.env.base}`, pass: `${process.env.key}`, autoIndex: true}
-mongoose.connect("mongodb://127.0.0.1:27017/tasks-manager")
+let option = { user: `${process.env.base}`, pass: `${process.env.key}`, autoIndex: true}
+mongoose.connect(`${process.env.url}`, option)
   .then(res => console.log("database connection success"))
   .catch(error => console.log(error))
 
 
+// base
+app.get('/', (req, res) => [
+  fs.readFile('../frontend/index.html', function (error, data) {
+    res.writeHead(200, { 'content-Type': 'text/html' })
+    res.end(data)
+  })
+])
 
+// adding route
 app.use("/task-manager", router);
 app.use("*", (req, res) => {
   res.status(404).json({ status: "fail", data: "Not Found" })
