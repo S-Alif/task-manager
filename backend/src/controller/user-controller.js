@@ -12,6 +12,15 @@ const dotenv = require('dotenv')
 dotenv.config({path: '../../secret.env'})
 
 
+// otp markup
+let otp_markup = (otpCode) => {
+  let markup = `
+  <h1>Your OTP : ${otpCode}</h1>
+  `
+
+  return markup
+}
+
 // user registration
 exports.registration = async (req, res) => {
   try {
@@ -40,7 +49,7 @@ exports.login = async (req, res) => {
     if(user_login == 1){
       let payload = {
         exp: Math.floor(Date.now()/1000)+(24*60*60),
-        data: req.body['email']
+        email: req.body['email']
       }
 
       // sign the token
@@ -91,11 +100,11 @@ exports.send_otp = async (req, res) => {
 
     // inserting otp to database
     await otpModel.create({email:email, otp:otpCode})
-    let send_email = await sendEmail(email, "Your OTP is : "+otpCode, "Task-manager verification otp")
+    let send_email = await sendEmail(email, otp_markup(otpCode), "Task-manager Account Verification")
     
     res.status(200).json({
       status: "OTP sending successfull",
-      data: send_email
+      data: send_email, email
     })
 
   } catch (error) {
@@ -107,7 +116,7 @@ exports.send_otp = async (req, res) => {
 }
 
 // verifying otp
-exports.verify_otp = async () => {
+exports.verify_otp = async (req, res) => {
   try {
     let email = req.params.email
     let otp = req.params.otp
