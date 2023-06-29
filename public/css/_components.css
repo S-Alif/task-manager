@@ -1,0 +1,15 @@
+/* designs for all the components */
+
+/* alerts */
+.alert{
+  position: fixed;
+  top: 100px;
+  right: -200%;
+  transition: 0.5s ease;
+  z-index: 100;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.alert.open{
+  right: 10px;
+  transition: 0.5s ease;
+}

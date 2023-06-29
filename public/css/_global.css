@@ -1,0 +1,33 @@
+/* design common for whole theme */
+
+html{
+  font-size: 100%;
+  box-sizing: border-box;
+}
+body{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "poppins", sans-serif;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* reuseable classes */
+.font-bangla{
+  font-family: "Noto Serif Bengali", sans-serif;
+}
+.my-fade-out{
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s ease;
+}
+.my-fade-in{
+  opacity: 1;
+  visibility: visible;
+  transition: 0.5s ease;
+}

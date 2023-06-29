@@ -11,12 +11,16 @@ const bodyParser = require('body-parser');
 const fs = require('fs')
 
 const app = new express()
-const router = require('./src/routes/routes')
+const router = require('./src/routes/routes');
+const path = require('path');
 dotenv.config()
 
 // security purpose
 app.use(cors())
-app.use(helmet())
+app.use(helmet({
+  defaultSrc: ["'self'"],
+  connectSrc: ["'self'", 'http://127.0.0.1:8000', 'http://localhost:8000'],
+}))
 app.use(mongoSanitize())
 app.use(hpp())
 app.use(express.json({limit : '50mb'}))
@@ -35,13 +39,8 @@ mongoose.connect(`${process.env.url}`, option)
   .catch(error => console.log(error))
 
 
-// base
-app.get('/', (req, res) => [
-  fs.readFile('../frontend/index.html', function (error, data) {
-    res.writeHead(200, { 'content-Type': 'text/html' })
-    res.end(data)
-  })
-])
+
+app.use(express.static('./public'))
 
 // adding route
 app.use("/task-manager", router);

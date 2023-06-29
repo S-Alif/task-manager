@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Task manager login</title>
+</head>
+<body class="bg-success-subtle">
+
+  <!-- alerts -->
+  <div class="alert d-inline-block text-capitalize my-fade-out" role="alert"></div>
+
+  <!-- main panel -->
+  <section class="main-panel">
+
+    <!-- login-panel -->
+    <div class="login-panel">
+      <h5 class="panel-title text-capitalize text-center fw-bold mb-4 mt-2 fs-4">task-manager/login</h5>
+
+      <form class="text-center" id="login-form">
+        <input type="email" id="email" class="form-control text-center fw-bolder mb-4" placeholder="Enter email" required>
+        <input type="password" id="pass" class="form-control text-center fw-bolder mb-4" placeholder="Enter password" required>
+        <button type="submit" class="btn btn-outline-success text-capitalize fw-bold fs-5 mb-4 ps-4 pe-4 submit-btn">login</button>
+      </form>
+
+      <p class="text-dark fw-light mt-4 text-center">Don't have an acount? <span><button type="button" class="text-capitalize text-decoration-underline text-primary" id="goto-reg-panel">sign in</button></span></p>
+    </div>
+
+
+    <!-- registration-panel -->
+    <div class="sign-in-panel my-fade-out">
+      <h5 class="panel-title text-capitalize text-center fw-bold mb-5 mt-2 fs-4">task-manager/sign in</h5>
+      
+      <form class="text-center" id="sign-form">
+        <input type="email" id="sign-email" class="form-control text-center fw-bolder mb-3" placeholder="Enter email" required>
+        <input type="password" id="sign-pass" class="form-control text-center fw-bolder mb-3" placeholder="Enter password"
+          required>
+        <input type="text" id="fName" class="form-control text-center fw-bolder mb-3" placeholder="First name" required>
+        <input type="text" id="lName" class="form-control text-center fw-bolder mb-3" placeholder="Last name" required>
+        <button type="submit" class="btn btn-outline-success text-capitalize fw-bold fs-5 mb-4 mt-3 ps-4 pe-4 submit-btn">sign in</button>
+      </form>
+      
+      <p class="text-dark fw-light mt-4 text-center">Already have an acount? <span><button type="button"
+            class="text-capitalize text-decoration-underline text-primary" id="goto-login-panel">log in</button></span></p>
+    </div>
+
+
+    <!-- otp panel -->
+    <div class="otp-panel my-fade-out">
+      <h5 class="panel-title text-capitalize text-center fw-bold mb-4 mt-2 fs-4">task-manager/otp</h5>
+
+      <p class="text-center fw-light">An email with otp was sent to your email. Please check your inbox/spam for the email and verify your account</p>
+      <form method="get" class="text-center" id="otp-form">
+        <input type="text" name="otp" id="otp" class="form-control text-center fw-bolder mb-3" placeholder="enter otp">
+
+        <button type="submit" class="btn btn-outline-success text-capitalize fw-bold fs-5 mb-4 mt-3 ps-4 pe-4 submit-btn">verify</button>
+      </form>
+
+      <p class="text-dark fw-light mt-4 text-center">Didn't get an OTP <span><button type="button"
+            class="text-capitalize text-decoration-underline text-primary" id="send-otp-again">send again</button></span></p>
+    </div>
+
+  </section>
+  <!-- main panel -->
+
+  
+  <script src="js/login-page.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

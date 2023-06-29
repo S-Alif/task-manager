@@ -15,7 +15,19 @@ dotenv.config({path: '../../secret.env'})
 // otp markup
 let otp_markup = (otpCode) => {
   let markup = `
-  <h1>Your OTP : ${otpCode}</h1>
+  <div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+  <div style="margin:50px auto;width:70%;padding:20px 0">
+    <div style="border-bottom:1px solid #eee">
+      <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Task-Manager</a>
+    </div>
+    <p style="font-size:1.1em">Hi,</p>
+    <p>Thank you for choosing Task-Manager. Use the following OTP to complete your Sign Up procedures</p>
+    <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otpCode}</h2>
+    <p style="font-size:0.9em;">Regards,<br />Task-Manager</p>
+    <hr style="border:none;border-top:1px solid #eee" />
+
+  </div>
+</div>
   `
 
   return markup
@@ -27,13 +39,13 @@ exports.registration = async (req, res) => {
     let reqBody = req.body
     let new_register = await userModel.create(reqBody)
     res.status(200).json({
-      status: "User creation successfull",
+      status: "successfull",
       data: new_register
     })
     
   } catch (error) {
     res.status(200).json({
-      status: "User creation failed",
+      status: "failed",
       data: error
     })
   }
@@ -55,20 +67,20 @@ exports.login = async (req, res) => {
       // sign the token
       let token = jwt.sign(payload, `${process.env.secretKey}`, {algorithm: 'HS256'});
       res.status(200).json({
-        status: 'User login succssfull',
+        status: 'successfull',
         data: token
       })
     }
     else{
       res.status(200).json({
-        status: 'User login failed',
+        status: 'failed',
         data: user_login
       })
     }
   }
   catch(error){
     res.status(200).json({
-      status: 'User login failed',
+      status: 'failed',
       data: error
     })
   }
@@ -103,13 +115,13 @@ exports.send_otp = async (req, res) => {
     let send_email = await sendEmail(email, otp_markup(otpCode), "Task-manager Account Verification")
     
     res.status(200).json({
-      status: "OTP sending successfull",
+      status: "successfull",
       data: send_email, email
     })
 
   } catch (error) {
     res.status(200).json({
-      status: "OTP sending failed",
+      status: "failed",
       data: error
     })
   }
@@ -127,7 +139,7 @@ exports.verify_otp = async (req, res) => {
     if(verify == 1){
       await otpModel.updateOne({ email: email, otp: otp, status: 0 }, {status: 1})  //updating otp status
       res.status(200).json({
-        status: "success",
+        status: "successfull",
         data: "Verification success"
       })
     }

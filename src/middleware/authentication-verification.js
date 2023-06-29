@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 
-dotenv.config({path: '../../secret.env'})
+dotenv.config()
 
 module.exports = (req, res, next) => {
   let token = req.headers['token']
@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
 
     if(error){
       res.status(401).json({
-        status: "Unauthorized"
+        status: "unauthorized"
       })
     }
     else{
